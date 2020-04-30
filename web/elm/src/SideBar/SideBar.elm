@@ -38,6 +38,7 @@ type alias Model m =
             , pipelines : WebData (List Concourse.Pipeline)
             , isSideBarOpen : Bool
             , screenSize : ScreenSize.ScreenSize
+            , isFavorited : Bool
         }
 
 
@@ -142,22 +143,7 @@ view model currentPipeline =
     then
         Html.div
             (id "side-bar" :: Styles.sideBar)
-            (model.pipelines
-                |> RemoteData.withDefault []
-                |> List.Extra.gatherEqualsBy .teamName
-                |> List.map
-                    (\( p, ps ) ->
-                        Team.team
-                            { hovered = model.hovered
-                            , pipelines = p :: ps
-                            , currentPipeline = currentPipeline
-                            }
-                            { name = p.teamName
-                            , isExpanded = Set.member p.teamName model.expandedTeams
-                            }
-                            |> Views.viewTeam
-                    )
-            )
+            (allPipelines model currentPipeline)
 
     else
         Html.text ""
@@ -182,6 +168,25 @@ tooltip { hovered } =
 
         _ ->
             Nothing
+
+
+allPipelines : Model m -> Maybe (PipelineScoped a) -> List (Html Message)
+allPipelines model currentPipeline =
+    model.pipelines
+        |> RemoteData.withDefault []
+        |> List.Extra.gatherEqualsBy .teamName
+        |> List.map
+            (\( p, ps ) ->
+                Team.team
+                    { hovered = model.hovered
+                    , pipelines = p :: ps
+                    , currentPipeline = currentPipeline
+                    }
+                    { name = p.teamName
+                    , isExpanded = Set.member p.teamName model.expandedTeams
+                    }
+                    |> Views.viewTeam
+            )
 
 
 hamburgerMenu :
