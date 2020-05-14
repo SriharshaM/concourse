@@ -44,6 +44,7 @@ model =
     , hovered = HoverState.NoHover
     , isSideBarOpen = True
     , screenSize = ScreenSize.Desktop
+    , favoritedPipelines = []
     }
 
 

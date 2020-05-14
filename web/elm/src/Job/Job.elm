@@ -423,6 +423,7 @@ view session model =
                 , hovered = session.hovered
                 , isSideBarOpen = session.isSideBarOpen
                 , screenSize = session.screenSize
+                , favoritedPipelines = session.favoritedPipelines
                 }
                 (Just
                     { pipelineName = model.jobIdentifier.pipelineName

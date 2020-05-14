@@ -3897,6 +3897,7 @@ session =
     , expandedTeams = Set.empty
     , pipelines = RemoteData.NotAsked
     , isSideBarOpen = False
+    , favoritedPipelines = []
     , screenSize = ScreenSize.Desktop
     , timeZone = Time.utc
     }

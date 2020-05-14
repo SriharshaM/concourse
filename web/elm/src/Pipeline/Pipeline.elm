@@ -419,6 +419,7 @@ view session model =
                     , hovered = session.hovered
                     , isSideBarOpen = session.isSideBarOpen
                     , screenSize = session.screenSize
+                    , favoritedPipelines = session.favoritedPipelines
                     }
                     (Just model.pipelineLocator)
                 , viewSubPage session model
