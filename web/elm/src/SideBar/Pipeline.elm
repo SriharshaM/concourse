@@ -85,4 +85,5 @@ pipeline session p =
                 Styles.Dim
         , filled = List.member pipelineId session.favoritedPipelines
         }
+    , id = pipelineId
     }
