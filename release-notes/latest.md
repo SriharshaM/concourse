@@ -4,3 +4,7 @@
 
 [static vars]: https://concourse-ci.org/vars.html#static-vars
 [dynamic vars]: https://concourse-ci.org/vars.html#dynamic-vars
+
+#### <sub><sup><a name="5390" href="#5390">:link:</a></sup></sub> fix
+
+* Add `--include-archive` flag for `fly pipelines` command.
