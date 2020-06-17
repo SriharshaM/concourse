@@ -38,7 +38,7 @@ type alias Model m =
             , pipelines : WebData (List Concourse.Pipeline)
             , isSideBarOpen : Bool
             , screenSize : ScreenSize.ScreenSize
-            , favoritedPipelines : List Concourse.PipelineIdentifier
+            , favoritedPipelines : List Int
         }
 
 

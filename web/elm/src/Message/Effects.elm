@@ -13,7 +13,7 @@ import Assets
 import Base64
 import Browser.Dom exposing (Viewport, getElement, getViewport, getViewportOf, setViewportOf)
 import Browser.Navigation as Navigation
-import Concourse exposing (encodeJob, encodePipeline, encodePipelineIdentifier, encodeTeam)
+import Concourse exposing (encodeJob, encodePipeline, encodeTeam)
 import Concourse.BuildStatus exposing (BuildStatus)
 import Concourse.Pagination exposing (Page)
 import Json.Decode
@@ -186,7 +186,7 @@ type Effect
     | GetViewportOf DomID
     | GetElement DomID
     | SyncTextareaHeight DomID
-    | SaveFavoritedPipelines (List Concourse.PipelineIdentifier)
+    | SaveFavoritedPipelines (List Int) -- List of Concourse.Pipeline.id
     | LoadFavoritedPipelines
 
 
@@ -615,8 +615,11 @@ runEffect effect key csrfToken =
         DeleteCachedPipelines ->
             deleteFromLocalStorage pipelinesKey
 
-        SaveFavoritedPipelines pipelines ->
-            saveToLocalStorage ( favoritedPipelinesKey, pipelines |> Json.Encode.list encodePipelineIdentifier )
+        SaveFavoritedPipelines pipelineIDs ->
+            saveToLocalStorage
+                ( favoritedPipelinesKey
+                , pipelineIDs |> Json.Encode.list Json.Encode.int
+                )
 
         LoadFavoritedPipelines ->
             loadFromLocalStorage favoritedPipelinesKey

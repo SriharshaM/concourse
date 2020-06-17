@@ -345,13 +345,7 @@ hasSideBar iAmLookingAtThePage =
             given iHaveAnOpenSideBar_
                 >> given iClickedThePipelineGroup
                 >> when iAmLookingAtTheFirstPipelineStar
-                >> then_
-                    (itIsClickable <|
-                        Message.SideBarStarIcon
-                            { teamName = "team"
-                            , pipelineName = "pipeline"
-                            }
-                    )
+                >> then_ (itIsClickable <| Message.SideBarStarIcon 0)
         , test "pipeline gets favorited when star icon is clicked" <|
             given iHaveAnOpenSideBar_
                 >> given iClickedThePipelineGroup
@@ -1012,10 +1006,7 @@ iClickedTheFirstPipelineStar =
         >> Application.update
             (TopLevelMessage.Update <|
                 Message.Click <|
-                    Message.SideBarStarIcon
-                        { teamName = "team"
-                        , pipelineName = "pipeline"
-                        }
+                    Message.SideBarStarIcon 0
             )
 
 
@@ -1335,8 +1326,7 @@ myBrowserFetchedFavoritedPipelines =
     Tuple.first
         >> Application.handleDelivery
             (Subscription.FavoritedPipelinesReceived <|
-                Ok
-                    [ { pipelineName = "pipeline", teamName = "team" } ]
+                Ok [ 0 ]
             )
 
 

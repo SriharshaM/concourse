@@ -129,7 +129,7 @@ all =
 
 
 viewPipeline : { active : Bool, hovered : Bool, favorited : Bool } -> Concourse.Pipeline -> Views.Pipeline
-viewPipeline { active, hovered, favorited } =
+viewPipeline { active, hovered, favorited } p =
     let
         pipelineIdentifier =
             { teamName = "team"
@@ -152,7 +152,7 @@ viewPipeline { active, hovered, favorited } =
 
         favoritedPipelines =
             if favorited then
-                [ pipelineIdentifier ]
+                [ p.id ]
 
             else
                 []
@@ -162,6 +162,7 @@ viewPipeline { active, hovered, favorited } =
         , currentPipeline = activePipeline
         , favoritedPipelines = favoritedPipelines
         }
+        p
 
 
 pipeline =

@@ -20,7 +20,7 @@ pipeline :
     { a
         | hovered : HoverState.HoverState
         , currentPipeline : Maybe (PipelineScoped b)
-        , favoritedPipelines : List Concourse.PipelineIdentifier
+        , favoritedPipelines : List Int
     }
     -> Concourse.Pipeline
     -> Views.Pipeline
@@ -83,7 +83,7 @@ pipeline session p =
 
             else
                 Styles.Dim
-        , filled = List.member pipelineId session.favoritedPipelines
+        , filled = List.member p.id session.favoritedPipelines
         }
-    , id = pipelineId
+    , id = p.id
     }
