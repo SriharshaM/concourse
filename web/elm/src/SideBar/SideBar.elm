@@ -142,6 +142,9 @@ handleDelivery delivery ( model, effects ) =
         SideBarStateReceived (Ok True) ->
             ( { model | isSideBarOpen = True }, effects )
 
+        FavoritedPipelinesReceived (Ok pipelines) ->
+            ( { model | favoritedPipelines = pipelines }, effects )
+
         _ ->
             ( model, effects )
 
